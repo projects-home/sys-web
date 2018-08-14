@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	   xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context-3.0.xsd
+		http://code.alibabatech.com/schema/dubbo
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+	<bean id="dubboConfig"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="order" value="1" />
+		<property name="ignoreUnresolvablePlaceholders" value="true" />
+		<!--<property name="locations" value="classpath:dubbo.properties" />-->
+	</bean>
+
+	<!-- 消费方 -->
+	<dubbo:application name="${x.dubbo.appname}" />
+	<dubbo:registry protocol="${x.dubbo.registry.protocol}"
+		address="${x.dubbo.registry.address}" id="slpRegistry" />
+	<!-- <dubbo:consumer timeout="${dubbo.provider.timeout}" /> -->
+
+	<context:component-scan base-package="com.x.centra" />
+	
+	<!-- 权益管理 -->
+	<!-- <dubbo:reference id="iCustDiscountSV" interface="com.x.centra.dst.api.discount.interfaces.ICustDiscountSV"
+					 registry="slpRegistry"/> -->
+					 
+</beans>
